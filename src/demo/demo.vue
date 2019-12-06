@@ -4,15 +4,15 @@
       :read-only="readOnly"
       :key="reRender"
       :chart-data="flowChartData"
-      @chart-data-update="updateChartData"
       :chart-data-node-items="flowChartNodeItems"
+      @save-data="save"
     />
   </div>
 </template>
 
 <script>
 import FlowchartEditor from './flowchartEditor'
-import data from './data'
+import chartData from './data'
 import dataNodeItems from './dataNodeItems'
 import cloneDeep from 'lodash/cloneDeep'
 
@@ -25,7 +25,7 @@ export default {
     return {
       readOnly: !true,
       reRender: +new Date(),
-      flowChartData: data,
+      flowChartData: chartData,
       flowChartNodeItems: dataNodeItems,
     }
   },
@@ -35,14 +35,16 @@ export default {
       this.readOnly = !this.readOnly
       this.$nextTick(() => {
         console.log(this.readOnly)
-        console.log(this.flowChartData)
         this.reRender = +new Date() // 重新渲染组件
       })
     })
   },
 
   methods: {
-    updateChartData(data) {
+    save(data) {
+      // 在这里写数据保存逻辑
+      console.log('save data')
+      console.log(data)
       this.flowChartData = cloneDeep(data)
     },
   },

@@ -55,6 +55,7 @@ export default {
 .contextMenu {
   display: none;
   overflow: hidden;
+  font-size: 12px;
   background: #fff;
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -84,5 +85,6 @@ export default {
 
 .contextMenu .item i {
   margin-right: 8px;
+  margin-top: 3px;
 }
 </style>

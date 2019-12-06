@@ -48,7 +48,7 @@
       extend="flow-polyline"
       :config="customEdgeConfig"
     />
-    <custom-command />
+    <custom-command :save="saveChartData" />
   </vue-flowchart-editor>
 </template>
 
@@ -77,11 +77,17 @@ export default {
     RegisterEdge,
   },
 
-  props: ['readOnly', 'toggleReadOnly', 'chartData', 'chartDataNodeItems'],
+  props: [
+    'readOnly',
+    'toggleReadOnly',
+    'chartData',
+    'chartDataNodeItems',
+    'saveData',
+  ],
 
   data() {
     return {
-      flowChartData: cloneDeep(this.chartData),
+      flowChartData: this.chartData,
       flowChartNodeItems: this.chartDataNodeItems,
       customEdgeConfig: {
         getActivedStyle(item) {
@@ -99,16 +105,6 @@ export default {
       tooltipShow: true,
       tooltipData: [],
     }
-  },
-
-  watch: {
-    flowChartData: {
-      handler(oldData, newData) {
-        console.log('flowChartData update')
-        this.$emit('chart-data-update', newData)
-      },
-      deep: true,
-    },
   },
 
   mounted() {
@@ -163,6 +159,10 @@ export default {
         }
         // 可以根据 action 和 model 来决定是否删掉左侧用过的节点
       }
+    },
+
+    saveChartData(data) {
+      this.$emit('save-data', data)
     },
   },
 }

@@ -20,12 +20,17 @@
       <toolbar-button command="selectAll" icon="select-all" text="全选" />
       <toolbar-button command="multiSelect" icon="select" text="框选" />
       <div class="split"></div>
-      <toolbar-button command="delete" text="删除" />
+      <toolbar-button command="delete" text="删除" label="保存数据" />
       <toolbar-button command="clear" icon="clear" text="清空画布" />
     </template>
     <!-- right toolbar button -->
     <div class="pull-right">
-      <toolbar-button command="generateData" icon="save" text="生成数据" />
+      <toolbar-button
+        command="generateData"
+        icon="save"
+        text="生成数据"
+        label="保存数据"
+      />
       <button @click.prevent="handleToggleReadOnly">
         {{ readOnly ? '编辑模式' : '只读模式' }}
       </button>
@@ -79,29 +84,47 @@ export default {
   }
 
   .command {
+    display: flex;
+    color: #333;
+
     i {
-      display: inline-block;
+      display: block;
       width: 27px;
       height: 27px;
-      color: #333;
       margin: 0 6px;
       padding-top: 10px;
       text-align: center;
       border: 1px solid #fff;
       cursor: pointer;
+    }
 
-      &:hover {
-        border: 1px solid #e6e9ed;
-      }
+    span {
+      display: block;
+      font-size: 12px;
+      padding-top: 10px;
+      margin-left: -6px;
+      padding-right: 6px;
+      line-height: 20px;
+      cursor: pointer;
+    }
+
+    &:hover {
+      color: #1890ff;
     }
   }
 
-  .disable i {
+  .disable {
     color: rgba(0, 0, 0, 0.25);
-    cursor: auto;
+    i {
+      cursor: not-allowed;
+    }
+
+    span {
+      cursor: not-allowed;
+    }
 
     &:hover {
-      border: 1px solid #fff;
+      color: rgba(0, 0, 0, 0.25);
     }
   }
 }

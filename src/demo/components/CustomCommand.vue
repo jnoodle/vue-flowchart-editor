@@ -18,8 +18,11 @@ export default {
 
   inject: ['root'],
 
+  props: ['save'],
+
   data() {
     const { propsAPI } = this.root
+    const { save } = this
     return {
       customCommandConfig: {
         queue: false, // 是否进入列队，默认为 true
@@ -30,7 +33,10 @@ export default {
         execute(/* editor */) {
           // 正向命令逻辑
           console.log('执行正向命令')
-          alert(JSON.stringify(propsAPI.save()))
+          const data = propsAPI.save()
+          console.log(data)
+          save(data)
+          alert(JSON.stringify(data))
         },
         back(/* editor */) {
           // 反向命令逻辑
