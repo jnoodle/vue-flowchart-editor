@@ -40,7 +40,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 - [G6](https://github.com/antvis/g6)
 - [GGEditor](https://github.com/alibaba/GGEditor)
-- [VueFlowchartEditor](https://github.com/ChrisShen93/VueFlowchartEditor)
+- [VGEditor](https://github.com/ChrisShen93/VGEditor)
 
 
 
