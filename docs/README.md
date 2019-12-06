@@ -1,26 +1,33 @@
-# vue-flowchart-editor
+# VueFlowchartEditor Documentation
 
-A flowchart editor component base on Vue and [G6](https://github.com/antvis/g6), enjoy ~
+## API
 
-## Project setup
-```
-yarn install
-```
+- [VueFlowchartEditor](./api/VueFlowchartEditor.md)
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+### 组件
 
-### Compiles and minifies for production
-```
-yarn build
-```
+- [Flow](./api/flow.md)
+- [Command](./api/command.md)
+- [Minimap](./api/minimap.md)
+- [ContextMenu](./api/contextMenu.md)
+- [Toolbar](./api/toolbar.md)
+- [ItemPanel](./api/itemPanel.md)
+- [DetailPanel](./api/detailPanel.md)
 
-### Lints and fixes files
-```
-yarn lint
-```
+### 注册
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- [RegisterNode](./api/registerNode.md)
+- [RegisterEdge](./api/registerEdge.md)
+- [RegisterGroup](./api/registerGroup.md)
+- [RegisterGuide](./api/registerGuide.md)
+- [RegisterCommand](./api/registerCommand.md)
+- [RegisterBehaviour](./api/registerBehaviour.md)
+
+### 事件
+
+- [PageEvents](./api/pageEvents.md)
+- [EditorEvents](./api/editorEvents.md)
+
+### 方法
+
+- [PropsAPI](./api/VueFlowchartEditor.md)

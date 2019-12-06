@@ -2,19 +2,29 @@
 
 A flowchart editor component base on Vue and [G6](https://github.com/antvis/g6), enjoy ~
 
-## Project setup
+一个基于 Vue 和 [G6](https://github.com/antvis/g6) 的在线流程图编辑器
+
+[docs](http://jnoodle.github.io/vue-flowchart-editor)
+[demo](http://jnoodle.github.io/vue-flowchart-editor/demo)
+
+## Project setup 项目设置
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### Compiles and hot-reloads for development 开发
 ```
 yarn serve
 ```
 
-### Compiles and minifies for production
+### Compiles for demo 编译 demo，具体使用可以参考 demo 代码
 ```
-yarn build
+yarn build:demo
+```
+
+### Compiles for production 编译库
+```
+yarn build:lib
 ```
 
 ### Lints and fixes files
@@ -22,5 +32,15 @@ yarn build
 yarn lint
 ```
 
-### Customize configuration
+### Customize configuration 项目使用 vue cli 编译
+
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+## References 参考
+
+[G6](https://github.com/antvis/g6)
+[GGEditor](https://github.com/alibaba/GGEditor)
+[VueFlowchartEditor](https://github.com/ChrisShen93/VueFlowchartEditor)
+
+
+
