@@ -60,7 +60,7 @@ import EditorDetailPanel from './components/DetailPanel'
 import EditorMinimap from './components/EditorMinimap'
 import EditorContextMenu from './components/ContextMenu'
 import CustomCommand from './components/CustomCommand'
-import { throttle, cloneDeep } from 'lodash'
+import { throttle } from 'lodash'
 
 export default {
   name: 'FlowchartEditor',
@@ -90,12 +90,12 @@ export default {
       flowChartData: this.chartData,
       flowChartNodeItems: this.chartDataNodeItems,
       customEdgeConfig: {
-        getActivedStyle(item) {
+        getActivedStyle(/*item*/) {
           return {
             lineWidth: 3,
           }
         },
-        getSelectedStyle(item) {
+        getSelectedStyle(/*item*/) {
           return {
             lineWidth: 3,
           }
@@ -136,7 +136,7 @@ export default {
     },
 
     handleNodeMouseLeave: throttle(
-      function(e) {
+      function() {
         // if (this.readOnly) {
         //   console.log(e)
         //   this.tooltipDom.style.display = 'none'
