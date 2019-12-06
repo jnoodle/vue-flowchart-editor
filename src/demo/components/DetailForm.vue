@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit.prevent="handleSubmit">
+    <form readonly>
       <div v-if="type === 'node'">
         <!--  customize properties -->
         <p class="form-item">
@@ -35,7 +35,9 @@
           <input v-model="formModel.size" />
         </p>
         <p class="form-item">
-          <button @click.prevent="handleSubmit" v-if="!readOnly">更新属性</button>
+          <button @click.prevent="handleSubmit" v-if="!readOnly">
+            更新属性
+          </button>
         </p>
       </div>
       <div v-else-if="type === 'edge'">
@@ -72,7 +74,7 @@
 </template>
 
 <script>
-import { omit } from 'lodash'
+import { omit, cloneDeep } from 'lodash'
 
 export default {
   name: 'EditorDetailForm',
@@ -89,7 +91,11 @@ export default {
 
   created() {
     const formModel = this.root.propsAPI.getSelected()[0].getModel()
-    this.formModel = Object.assign({}, { shape: 'flow-smooth' }, formModel)
+    this.formModel = Object.assign(
+      {},
+      { shape: 'flow-smooth' },
+      cloneDeep(formModel) // 防止误编辑
+    )
   },
 
   methods: {

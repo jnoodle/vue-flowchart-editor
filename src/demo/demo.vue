@@ -1,11 +1,20 @@
 <template>
   <div class="vue-flowchart-editor-container">
-    <flowchart-editor :read-only="readOnly" :key="reRender" />
+    <flowchart-editor
+      :read-only="readOnly"
+      :key="reRender"
+      :chart-data="flowChartData"
+      @chart-data-update="updateChartData"
+      :chart-data-node-items="flowChartNodeItems"
+    />
   </div>
 </template>
 
 <script>
 import FlowchartEditor from './flowchartEditor'
+import data from './data'
+import dataNodeItems from './dataNodeItems'
+import cloneDeep from 'lodash/cloneDeep'
 
 export default {
   name: 'VueFlowchartEditorDemo',
@@ -14,8 +23,10 @@ export default {
   },
   data() {
     return {
-      readOnly: true,
+      readOnly: !true,
       reRender: +new Date(),
+      flowChartData: data,
+      flowChartNodeItems: dataNodeItems,
     }
   },
 
@@ -24,12 +35,17 @@ export default {
       this.readOnly = !this.readOnly
       this.$nextTick(() => {
         console.log(this.readOnly)
+        console.log(this.flowChartData)
         this.reRender = +new Date() // 重新渲染组件
       })
     })
   },
 
-  methods: {},
+  methods: {
+    updateChartData(data) {
+      this.flowChartData = cloneDeep(data)
+    },
+  },
 }
 </script>
 

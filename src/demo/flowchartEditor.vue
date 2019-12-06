@@ -17,6 +17,7 @@
         <div class="vfe-chart-main">
           <flow
             :data="flowChartData"
+            :onClick="handleClick"
             :onNodeClick="handleNodeClick"
             :onNodeDoubleClick="handleNodeDoubleClick"
             :onNodeMouseLeave="handleNodeMouseLeave"
@@ -24,7 +25,9 @@
             :graph="{ mode: 'readOnly' }"
           />
           <div class="tooltip">
-            tooltip
+            <template v-for="item in tooltipData">
+              <p :key="item.name">{{ item.name }}: {{ item.value }}</p>
+            </template>
           </div>
         </div>
         <!-- Right Panel -->
@@ -57,9 +60,7 @@ import EditorDetailPanel from './components/DetailPanel'
 import EditorMinimap from './components/EditorMinimap'
 import EditorContextMenu from './components/ContextMenu'
 import CustomCommand from './components/CustomCommand'
-import data from './data'
-import dataNodeItems from './dataNodeItems'
-import throttle from 'lodash/throttle'
+import { throttle, cloneDeep } from 'lodash'
 
 export default {
   name: 'FlowchartEditor',
@@ -76,12 +77,12 @@ export default {
     RegisterEdge,
   },
 
-  props: ['readOnly', 'toggleReadOnly'],
+  props: ['readOnly', 'toggleReadOnly', 'chartData', 'chartDataNodeItems'],
 
   data() {
     return {
-      flowChartData: data,
-      flowChartNodeItems: dataNodeItems,
+      flowChartData: cloneDeep(this.chartData),
+      flowChartNodeItems: this.chartDataNodeItems,
       customEdgeConfig: {
         getActivedStyle(item) {
           return {
@@ -96,7 +97,18 @@ export default {
       },
       tooltipDom: null,
       tooltipShow: true,
+      tooltipData: [],
     }
+  },
+
+  watch: {
+    flowChartData: {
+      handler(oldData, newData) {
+        console.log('flowChartData update')
+        this.$emit('chart-data-update', newData)
+      },
+      deep: true,
+    },
   },
 
   mounted() {
@@ -104,24 +116,35 @@ export default {
   },
 
   methods: {
+    handleClick(e) {
+      console.log(e)
+      if (this.readOnly && !e.item) {
+        this.tooltipDom.style.display = 'none'
+      }
+    },
+
     handleNodeClick(e) {
       console.log(e)
     },
 
     handleNodeDoubleClick(e) {
+      console.log(e.item.model.data)
       if (this.readOnly) {
-        this.tooltipDom.style.left = e.domX + 'px'
-        this.tooltipDom.style.top = e.domY + 'px'
-        this.tooltipDom.style.display = 'block'
+        this.tooltipData = e.item.model.data
+        this.$nextTick(() => {
+          this.tooltipDom.style.left = e.domX + 'px'
+          this.tooltipDom.style.top = e.domY + 'px'
+          this.tooltipDom.style.display = 'block'
+        })
       }
     },
 
     handleNodeMouseLeave: throttle(
       function(e) {
-        if (this.readOnly) {
-          console.log(e)
-          this.tooltipDom.style.display = 'none'
-        }
+        // if (this.readOnly) {
+        //   console.log(e)
+        //   this.tooltipDom.style.display = 'none'
+        // }
       },
       1000,
       {
@@ -133,9 +156,11 @@ export default {
     handleAfterChange(e) {
       if (!this.readOnly) {
         const { action, item } = e
-        const model = item.getModel()
         console.log(action)
-        console.log(model)
+        if (item && item.getModel) {
+          const model = item.getModel()
+          console.log(model)
+        }
         // 可以根据 action 和 model 来决定是否删掉左侧用过的节点
       }
     },
@@ -180,9 +205,18 @@ export default {
         top: 0;
         left: 0;
         width: 100px;
-        height: 100px;
+        height: auto;
+        padding: 15px;
+        border-radius: 10px;
         z-index: 999;
         opacity: 0.8;
+        color: #ffffff;
+        font-size: 12px;
+        background-color: #000;
+
+        p {
+          margin: 0;
+        }
       }
     }
 

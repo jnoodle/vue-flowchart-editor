@@ -1,9 +1,12 @@
 export default [
   {
     model: {
-      id: '1',
       label: '测试节点1',
       data: [
+        {
+          name: 'id',
+          value: 'node1',
+        },
         {
           name: 'prop11',
           value: 'prop11',
@@ -17,14 +20,12 @@ export default [
   },
   {
     model: {
-      id: '2',
       label: '测试节点2',
     },
   },
   {
     shape: 'flow-rect',
     model: {
-      id: '3',
       label: '测试节点3',
     },
   },
@@ -32,7 +33,6 @@ export default [
     shape: 'flow-circle',
     size: '72*72',
     model: {
-      id: '4',
       label: '测试节点4',
       color: '#FA8C16',
     },
@@ -40,7 +40,6 @@ export default [
   {
     shape: 'flow-rhombus',
     model: {
-      id: '5',
       label: '测试节点5',
       color: '#13C2C2',
     },
@@ -49,7 +48,6 @@ export default [
     shape: 'flow-circle',
     size: '72*72',
     model: {
-      id: '6',
       label: '测试节点6',
       color: '#FA8C16',
     },
