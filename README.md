@@ -4,7 +4,7 @@ A flowchart editor component base on Vue and [G6](https://github.com/antvis/g6),
 
 一个基于 Vue 和 [G6](https://github.com/antvis/g6) 的在线流程图编辑器
 
-- [docs](http://jnoodle.github.io/vue-flowchart-editor)
+- [docs](http://jnoodle.github.io/vue-flowchart-editor/docs)
 - [demo](http://jnoodle.github.io/vue-flowchart-editor/demo)
 
 ## Project setup 项目设置
