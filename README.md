@@ -7,6 +7,13 @@ A flowchart editor component base on Vue and [G6](https://github.com/antvis/g6),
 - [docs](http://jnoodle.github.io/vue-flowchart-editor/docs)
 - [demo](http://jnoodle.github.io/vue-flowchart-editor/demo)
 
+
+## Setup
+
+```
+yarn add vue-flowchart-editor
+```
+
 ## Project setup 项目设置
 ```
 yarn install

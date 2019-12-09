@@ -1,6 +1,6 @@
 {
   "name": "vue-flowchart-editor",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A flowchart editor component base on Vue and G6",
   "keywords": [
     "vue",
