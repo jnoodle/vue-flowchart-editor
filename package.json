@@ -21,13 +21,20 @@
     "url": "git@github.com:jnoodle/vue-flowchart-editor.git"
   },
   "files": [
-    "dist",
+    "lib/*",
+    "src/*",
+    "public/*",
+    "*.json",
+    "*.js",
     "*.md"
   ],
+  "main": "dist/vue-flowchart-editor.common.js",
+  "unpkg": "dist/vue-flowchart-editor.umd.min.js",
+  "jsdelivr": "dist/vue-flowchart-editor.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve src/demo/app.js",
-    "build:demo": "vue-cli-service build src/demo/app.js",
-    "build:lib": "vue-cli-service build --target lib --name VueFlowchartEditor src/index.js",
+    "build:demo": "BUILD=demo vue-cli-service build src/demo/app.js",
+    "build:lib": "BUILD=lib vue-cli-service build --target lib --name vue-flowchart-editor src/index.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
