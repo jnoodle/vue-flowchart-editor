@@ -3,7 +3,8 @@ module.exports = {
   outputDir: process.env.BUILD === 'lib' ? './dist' : 'demo',
   configureWebpack: {
     output: {
-      libraryExport: 'default',
+      library: 'vue-flowchart-editor',
+      libraryTarget: 'umd', // fix export components undefined problems
     },
   },
 }
