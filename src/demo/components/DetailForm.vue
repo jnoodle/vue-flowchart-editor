@@ -86,6 +86,10 @@ export default {
   data() {
     return {
       formModel: {},
+      maxNodeWidth: 200, // fit long label
+      defaultNodeWidth: 80,
+      defaultNodeHeight: 48,
+      fontSize: 12,
     }
   },
 
@@ -105,8 +109,72 @@ export default {
       setTimeout(() => {
         const item = getSelected()[0]
         if (!item) return
+
+        // 自动调整尺寸
+        const adjustSize = model => {
+          if (model.type !== 'node' || model.shape !== 'flow-rect') {
+            return model
+          }
+          const canvas = document.createElement('canvas')
+          const canvasContext = canvas.getContext('2d')
+          canvasContext.font = this.fontSize + 'px System'
+          const maxWidth = this.maxNodeWidth
+          let label = model.label.replace('\n', '')
+          let sourceWidth = this.defaultNodeWidth
+          let sourceHeight = this.defaultNodeHeight
+          const spacing = 10
+          model.size = `${sourceWidth}*${sourceHeight}` // 先恢复默认尺寸
+
+          if (
+            canvasContext.measureText(label).width + spacing <= sourceWidth ||
+            sourceWidth >= maxWidth
+          ) {
+            return model
+          }
+
+          // 自动撑宽
+          if (canvasContext.measureText(label).width + spacing <= maxWidth) {
+            return {
+              ...model,
+              size: `${canvasContext.measureText(label).width +
+                spacing}*${sourceHeight}`,
+            }
+          }
+
+          // 自动折行
+          let multilineText = ''
+          let multilineCount = 1
+          let multilineTextWidth = 0
+
+          for (const char of label) {
+            const { width } = canvasContext.measureText(char)
+
+            if (multilineTextWidth + width + spacing >= maxWidth) {
+              multilineText += '\n'
+              multilineTextWidth = 0
+              multilineCount++
+            }
+
+            multilineText += char
+            multilineTextWidth += width
+          }
+
+          return {
+            ...model,
+            label: multilineText,
+            size: `${maxWidth}*${Math.max(
+              sourceHeight,
+              this.fontSize * multilineCount * 1.2 + spacing
+            )}`,
+          }
+        }
+
+        const newFormModel = adjustSize(formModel)
+
+        console.log(newFormModel)
+
         executeCommand(() => {
-          update(item, formModel)
+          update(item, newFormModel)
         })
       }, 0)
     },

@@ -22,7 +22,7 @@
             :onNodeDoubleClick="handleNodeDoubleClick"
             :onNodeMouseLeave="handleNodeMouseLeave"
             :onAfterChange="handleAfterChange"
-            :graph="{ mode: 'readOnly' }"
+            :graph="graphConfig"
           />
           <div class="tooltip">
             <template v-for="item in tooltipData">
@@ -89,6 +89,9 @@ export default {
     return {
       flowChartData: this.chartData,
       flowChartNodeItems: this.chartDataNodeItems,
+      graphConfig: {
+        mode: 'readOnly',
+      },
       customEdgeConfig: {
         getActivedStyle(/*item*/) {
           return {

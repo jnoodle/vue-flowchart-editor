@@ -35,6 +35,7 @@ export default {
           console.log('执行正向命令')
           const data = propsAPI.save()
           console.log(data)
+          console.log(JSON.stringify(data))
           save(data)
           alert(JSON.stringify(data))
         },
