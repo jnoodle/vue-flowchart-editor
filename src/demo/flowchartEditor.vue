@@ -48,7 +48,7 @@
       extend="flow-polyline"
       :config="customEdgeConfig"
     />
-    <custom-command :save="saveChartData" />
+    <custom-command :save="saveChartData" :download="downloadImage" />
   </vue-flowchart-editor>
 </template>
 
@@ -166,6 +166,19 @@ export default {
 
     saveChartData(data) {
       this.$emit('save-data', data)
+    },
+
+    _downloadImage(data, filename = 'flowchart.png') {
+      const a = document.createElement('a')
+      a.href = data
+      a.download = filename
+      document.body.appendChild(a)
+      a.click()
+    },
+
+    downloadImage() {
+      const page = this.$refs['flowChart'].propsAPI.editor.getCurrentPage()
+      this._downloadImage(page.saveImage().toDataURL('image/png'))
     },
   },
 }

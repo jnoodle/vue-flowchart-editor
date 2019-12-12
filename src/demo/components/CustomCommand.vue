@@ -1,9 +1,16 @@
 <template>
-  <register-command
-    name="generateData"
-    :config="customCommandConfig"
-    extend="copy"
-  />
+  <div>
+    <register-command
+      name="generateData"
+      :config="generateDataCommandConfig"
+      extend="copy"
+    />
+    <register-command
+      name="downloadImage"
+      :config="downloadImageCommandConfig"
+      extend="copy"
+    />
+  </div>
 </template>
 
 <script>
@@ -18,13 +25,13 @@ export default {
 
   inject: ['root'],
 
-  props: ['save'],
+  props: ['save', 'download'],
 
   data() {
     const { propsAPI } = this.root
-    const { save } = this
+    const { save, download } = this
     return {
-      customCommandConfig: {
+      generateDataCommandConfig: {
         queue: false, // 是否进入列队，默认为 true
         enable(/* editor */) {
           // 命令是否可用
@@ -43,6 +50,16 @@ export default {
           // 反向命令逻辑
           console.log('执行反向命令')
         },
+      },
+      downloadImageCommandConfig: {
+        queue: false,
+        enable() {
+          return true
+        },
+        execute() {
+          download()
+        },
+        back() {},
       },
     }
   },
