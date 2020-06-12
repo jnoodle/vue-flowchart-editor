@@ -1,7 +1,7 @@
 import G6 from '@antv/g6'
 import { MINIMAP_CONTAINER } from '../../common/constants'
 
-require('@antv/g6/build/plugin.tool.minimap')
+require('@antv/g6/lib/plugins/minimap')
 
 export default {
   name: 'Minimap',
@@ -41,7 +41,7 @@ export default {
     },
 
     init() {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         this.containerId = `${MINIMAP_CONTAINER}_${this.root.editor.id}`
         const container = this.container || this.containerId
 
