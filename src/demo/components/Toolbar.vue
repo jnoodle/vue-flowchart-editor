@@ -25,18 +25,8 @@
     </template>
     <!-- right toolbar button -->
     <div class="pull-right">
-      <toolbar-button
-        command="generateData"
-        icon="save"
-        text="生成数据"
-        label="保存数据"
-      />
-      <toolbar-button
-        command="downloadImage"
-        icon="image"
-        text="下载图像"
-        label="下载图像"
-      />
+      <toolbar-button command="generateData" icon="save" text="生成数据" label="保存数据" />
+      <toolbar-button command="downloadImage" icon="image" text="下载图像" label="下载图像" />
       <button @click.prevent="handleToggleReadOnly">
         {{ readOnly ? '编辑模式' : '只读模式' }}
       </button>

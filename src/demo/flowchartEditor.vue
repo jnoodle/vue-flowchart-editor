@@ -139,7 +139,7 @@ export default {
     },
 
     handleNodeMouseLeave: throttle(
-      function() {
+      function () {
         // if (this.readOnly) {
         //   console.log(e)
         //   this.tooltipDom.style.display = 'none'
