@@ -12,7 +12,7 @@ export default {
   inject: ['root'],
 
   props: [
-    ...GRAPH_MOUSE_EVENTS.map(event => {
+    ...GRAPH_MOUSE_EVENTS.map((event) => {
       const evN = GRAPH_MOUSE_REACT_EVENTS[event]
       return [
         `on${evN}`,
@@ -23,8 +23,8 @@ export default {
         `onAnchor${evN}`,
       ]
     }).flat(),
-    ...GRAPH_OTHER_EVENTS.map(event => GRAPH_OTHER_REACT_EVENTS[event]),
-    ...PAGE_EVENTS.map(event => PAGE_REACT_EVENTS[event]),
+    ...GRAPH_OTHER_EVENTS.map((event) => GRAPH_OTHER_REACT_EVENTS[event]),
+    ...PAGE_EVENTS.map((event) => PAGE_REACT_EVENTS[event]),
   ],
 
   data() {
@@ -60,7 +60,7 @@ export default {
     },
 
     init() {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         this.pageId = this.getPageId()
 
         merge(this.config, this.$props, {
@@ -83,7 +83,7 @@ export default {
 
       const graph = this.getGraph()
 
-      GRAPH_MOUSE_EVENTS.forEach(event => {
+      GRAPH_MOUSE_EVENTS.forEach((event) => {
         const eventName = GRAPH_MOUSE_REACT_EVENTS[event]
 
         addListener(graph, `${event}`, this[`on${eventName}`])
@@ -94,11 +94,11 @@ export default {
         addListener(graph, `anchor:${event}`, this[`onAnchor${eventName}`])
       })
 
-      GRAPH_OTHER_EVENTS.forEach(event => {
+      GRAPH_OTHER_EVENTS.forEach((event) => {
         addListener(graph, [event], this[GRAPH_OTHER_REACT_EVENTS[event]])
       })
 
-      PAGE_EVENTS.forEach(event => {
+      PAGE_EVENTS.forEach((event) => {
         addListener(this.page, [event], this[PAGE_REACT_EVENTS[event]])
       })
     },

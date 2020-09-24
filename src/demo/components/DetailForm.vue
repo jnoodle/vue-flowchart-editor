@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { omit, cloneDeep } from 'lodash'
+import { cloneDeep } from 'lodash'
 
 export default {
   name: 'EditorDetailForm',
@@ -103,7 +103,7 @@ export default {
   },
 
   methods: {
-    handleSubmit(e) {
+    handleSubmit() {
       const { getSelected, executeCommand, update } = this.root.propsAPI
       const { formModel } = this
       setTimeout(() => {
@@ -123,22 +123,19 @@ export default {
           let sourceWidth = this.defaultNodeWidth
           let sourceHeight = this.defaultNodeHeight
           const spacing = 10
+          const widthWithSpacing =
+            canvasContext.measureText(label).width + spacing
           model.size = `${sourceWidth}*${sourceHeight}` // 先恢复默认尺寸
 
-          if (
-            canvasContext.measureText(label).width + spacing <= sourceWidth ||
-            sourceWidth >= maxWidth
-          ) {
+          if (widthWithSpacing <= sourceWidth || sourceWidth >= maxWidth) {
             return model
           }
 
           // 自动撑宽
-          if (canvasContext.measureText(label).width + spacing <= maxWidth) {
+          if (widthWithSpacing <= maxWidth) {
             return {
               ...model,
-              size: `${
-                canvasContext.measureText(label).width + spacing
-                }*${sourceHeight}`,
+              size: `${widthWithSpacing}*${sourceHeight}`,
             }
           }
 

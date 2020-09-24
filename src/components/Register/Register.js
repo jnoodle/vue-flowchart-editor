@@ -1,7 +1,7 @@
 import Editor from '../Base/Editor'
 import { upperFirst } from '../../utils'
 
-export default function(type) {
+export default (type) => {
   return {
     name: `Register${type}`,
 
@@ -42,7 +42,7 @@ export default function(type) {
             keys = ['name', 'behaviour', 'dependences']
           }
 
-          const args = keys.map(key => this[key])
+          const args = keys.map((key) => this[key])
 
           host[`register${upperFirst(type)}`](...args)
         })

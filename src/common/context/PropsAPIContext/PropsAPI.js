@@ -3,13 +3,11 @@ class PropsAPI {
 
   constructor(editor) {
     this.editor = editor
-
-    ;['executeCommand'].forEach(key => {
+    ;['executeCommand'].forEach((key) => {
       this[key] = (...params) => this.editor[key](...params)
     })
-
     ;['read', 'save', 'add', 'find', 'update', 'remove', 'getSelected'].forEach(
-      key => {
+      (key) => {
         this[key] = (...params) => this.currentPage[key](...params)
       }
     )

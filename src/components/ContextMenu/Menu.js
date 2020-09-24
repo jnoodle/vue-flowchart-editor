@@ -1,4 +1,4 @@
-export default function(type) {
+export default (type) => {
   return {
     name: `${type}Menu`,
 

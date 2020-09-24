@@ -27,7 +27,7 @@ export default {
     bindKeyUpEditLabel() {
       const editLabel = this.page.get('labelTextArea')
 
-      editLabel.on('keyup', e => {
+      editLabel.on('keyup', (e) => {
         e.stopPropagation()
 
         const item = editLabel.focusItem
