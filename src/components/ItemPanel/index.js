@@ -5,16 +5,16 @@ export { Item }
 export default {
   name: 'ItemPanel',
 
-  created () {
+  created() {
     this.bindEvent()
   },
 
-  beforeDestroy () {
+  beforeDestroy() {
     document.removeEventListener('mouseup', this.handleMouseUp)
   },
 
   methods: {
-    bindEvent () {
+    bindEvent() {
       this.root.handleAfterAddPage(({ page }) => {
         this.page = page
 
@@ -22,18 +22,20 @@ export default {
       })
     },
 
-    handleMouseUp () {
+    handleMouseUp() {
       this.page.cancelAdd()
-    }
+    },
   },
 
   inject: ['root'],
 
-  render () {
+  render() {
     return (
       <div>
-        {this.$scopedSlots.default ? this.$scopedSlots.default() : this.$slots.default}
+        {this.$scopedSlots.default
+          ? this.$scopedSlots.default()
+          : this.$slots.default}
       </div>
     )
-  }
+  },
 }

@@ -10,7 +10,7 @@ import PropsAPI from '../../common/context/PropsAPIContext/PropsAPI'
 export default {
   name: 'VueFlowchartEditor',
 
-  props: [...EDITOR_EVENTS.map(event => EDITOR_REACT_EVENTS[event])],
+  props: [...EDITOR_EVENTS.map((event) => EDITOR_REACT_EVENTS[event])],
 
   data() {
     return {
@@ -61,7 +61,7 @@ export default {
     },
 
     bindEvent() {
-      EDITOR_EVENTS.forEach(event => {
+      EDITOR_EVENTS.forEach((event) => {
         this.addListener(this.editor, [event], this[EDITOR_REACT_EVENTS[event]])
       })
     },

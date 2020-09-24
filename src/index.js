@@ -1,33 +1,33 @@
-import VueFlowchartEditor from "./components/Editor";
-import Flow from "./components/Flow";
-import Koni from "./components/Koni";
-import Mind from "./components/Mind";
+import VueFlowchartEditor from './components/Editor'
+import Flow from './components/Flow'
+import Koni from './components/Koni'
+import Mind from './components/Mind'
 import {
   RegisterNode,
   RegisterEdge,
   RegisterGroup,
   RegisterGuide,
   RegisterCommand,
-  RegisterBehaviour
-} from "./components/Register";
-import Command from "./components/Command";
-import Minimap from "./components/Minimap";
+  RegisterBehaviour,
+} from './components/Register'
+import Command from './components/Command'
+import Minimap from './components/Minimap'
 import ContextMenu, {
   NodeMenu,
   EdgeMenu,
   GroupMenu,
   MultiMenu,
-  CanvasMenu
-} from "./components/ContextMenu";
-import Toolbar from "./components/Toolbar";
-import ItemPanel, { Item } from "./components/ItemPanel";
+  CanvasMenu,
+} from './components/ContextMenu'
+import Toolbar from './components/Toolbar'
+import ItemPanel, { Item } from './components/ItemPanel'
 import DetailPanel, {
   NodePanel,
   EdgePanel,
   GroupPanel,
   MultiPanel,
-  CanvasPanel
-} from "./components/DetailPanel";
+  CanvasPanel,
+} from './components/DetailPanel'
 
 export {
   Flow,
@@ -55,7 +55,7 @@ export {
   GroupPanel,
   MultiPanel,
   CanvasPanel,
-  DetailPanel
-};
+  DetailPanel,
+}
 
-export default VueFlowchartEditor;
+export default VueFlowchartEditor

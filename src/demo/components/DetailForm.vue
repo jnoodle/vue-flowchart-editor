@@ -111,7 +111,7 @@ export default {
         if (!item) return
 
         // 自动调整尺寸
-        const adjustSize = model => {
+        const adjustSize = (model) => {
           if (model.type !== 'node' || model.shape !== 'flow-rect') {
             return model
           }
@@ -136,8 +136,9 @@ export default {
           if (canvasContext.measureText(label).width + spacing <= maxWidth) {
             return {
               ...model,
-              size: `${canvasContext.measureText(label).width +
-                spacing}*${sourceHeight}`,
+              size: `${
+                canvasContext.measureText(label).width + spacing
+                }*${sourceHeight}`,
             }
           }
 

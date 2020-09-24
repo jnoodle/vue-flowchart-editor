@@ -43,11 +43,11 @@ yarn lint
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+## G6 version
+`^3.5.3`
+
 ## References 参考
 
 - [G6](https://github.com/antvis/g6)
 - [GGEditor](https://github.com/alibaba/GGEditor)
 - [VGEditor](https://github.com/ChrisShen93/VGEditor)
-
-
-
