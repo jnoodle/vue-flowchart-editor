@@ -18,15 +18,11 @@ import { RegisterCommand } from '../../index'
 
 export default {
   name: 'CustomCommand',
-
   components: {
     RegisterCommand,
   },
-
   inject: ['root'],
-
   props: ['save', 'download'],
-
   data() {
     const { propsAPI } = this.root
     const { save, download } = this
@@ -39,12 +35,9 @@ export default {
         },
         execute(/* editor */) {
           // 正向命令逻辑
-          console.log('执行正向命令')
+          alert('执行正向命令')
           const data = propsAPI.save()
-          console.log(data)
-          console.log(JSON.stringify(data))
           save(data)
-          alert(JSON.stringify(data))
         },
         back(/* editor */) {
           // 反向命令逻辑

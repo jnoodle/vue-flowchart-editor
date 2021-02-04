@@ -1,18 +1,12 @@
 <template>
   <item-panel class="item-panel">
     <template v-for="(item, index) in nodeItems">
-      <item
-        :key="index"
-        :type="item.type || 'node'"
-        :size="item.size || '80*48'"
-        :shape="item.shape || 'flow-rect'"
-        :model="{
+      <item :key="index" :type="item.type || 'node'" :size="item.size || '80*48'" :shape="item.shape || 'flow-rect'" :model="{
           // must have model property
           color: item.model.color || '#1890FF',
           label: item.model.label || '节点',
           ...item.model,
-        }"
-      >
+        }">
         <template v-if="item.src">
           <div class="item item-img">
             <img :src="item.src" :alt="item.model.label" />
@@ -48,14 +42,18 @@ export default {
 .item-panel {
   box-sizing: border-box;
   position: fixed;
+  height: 50vh;
   top: 45px;
-  bottom: 0;
+  bottom: 50%;
   left: 0;
-  width: 150px;
+  width: 300px;
   padding: 10px;
   text-align: center;
   overflow-y: auto;
-
+  overflow-x: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   .item {
     display: flex;
     justify-content: center;
@@ -67,28 +65,30 @@ export default {
     user-select: none;
 
     &.item-flow-rect {
-      width: 100px;
+      width: 60px;
       height: 50px;
+      margin: 0 10px;
       border: 1px solid rgb(24, 144, 255);
       background-color: rgba(24, 144, 255, 0.2);
     }
 
     &.item-flow-circle {
-      width: 70px;
-      height: 70px;
+      width: 50px;
+      height: 50px;
+      margin: 0 40px;
       border-radius: 60px;
       border: 1px solid rgb(250, 140, 22);
       background-color: rgba(250, 140, 22, 0.2);
     }
 
     &.item-flow-rhombus {
-      width: 70px;
-      height: 70px;
-      margin: 25px auto;
+      width: 50px;
+      height: 50px;
+      // margin-right: 10px;
+      margin-right:30px;
       border: 1px solid rgb(19, 194, 194);
       background-color: rgba(19, 194, 194, 0.2);
       transform: rotate(45deg);
-
       span {
         transform: rotate(-45deg);
       }

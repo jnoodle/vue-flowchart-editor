@@ -1,5 +1,5 @@
 <template>
-  <minimap :height="200" />
+  <minimap :height="200"/>
 </template>
 
 <script>

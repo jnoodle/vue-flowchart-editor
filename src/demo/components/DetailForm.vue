@@ -1,75 +1,20 @@
 <template>
-  <div>
-    <form readonly>
-      <div v-if="type === 'node'">
-        <!--  customize properties -->
-        <p class="form-item">
-          <label>id</label>
-          <input v-model="formModel.id" />
-        </p>
-        <p class="form-item">
-          <label>名称</label>
-          <input v-model="formModel.label" />
-        </p>
-        <p class="form-item" v-for="item in formModel.data" :key="item.name">
-          <label>{{ item.name }}</label>
-          <input v-model="item.value" />
-        </p>
-        <hr />
-        <p class="form-item">
-          <label>颜色</label>
-          <input v-model="formModel.color" />
-        </p>
-        <p class="form-item">
-          <label>形状</label>
-          <select v-model="formModel.shape">
-            <option value="">-- 请选择节点的形状 --</option>
-            <option value="flow-rect">rect</option>
-            <option value="flow-circle">circle</option>
-            <option value="flow-rhombus">rhombus</option>
-            <option value="flow-capsule">capsule</option>
-          </select>
-        </p>
-        <p class="form-item">
-          <label>尺寸</label>
-          <input v-model="formModel.size" />
-        </p>
-        <p class="form-item">
-          <button @click.prevent="handleSubmit" v-if="!readOnly">
-            更新属性
-          </button>
-        </p>
-      </div>
-      <div v-else-if="type === 'edge'">
-        <p>
-          <select v-model="formModel.shape">
-            <option value="">-- 请选择边的形状 --</option>
-            <option value="flow-smooth">Smooth</option>
-            <option value="flow-polyline">Polyline</option>
-            <option value="flow-polyline-round">Polyline Round</option>
-            <option value="custom-polyline">Custom Polyline</option>
-          </select>
-        </p>
-        <p class="form-item">
-          <label>id</label>
-          <input v-model="formModel.id" />
-        </p>
-        <p class="form-item">
-          <label>名称</label>
-          <input v-model="formModel.label" />
-        </p>
-        <p class="form-item" v-for="item in formModel.data" :key="item.name">
-          <label>{{ item.name }}</label>
-          <input v-model="item.value" />
-        </p>
-        <p class="form-item">
-          <button @click.prevent="handleSubmit">更新属性</button>
-        </p>
-      </div>
-      <div v-else-if="type === 'group'">
-        <input v-model="formModel.label" @blur.prevent="handleSubmit" />
-      </div>
-    </form>
+  <div readonly>
+    <el-form v-if="type === 'node'" label-width="80" label-position="right" @submit.native.prevent="handleSubmit">
+      <el-form-item label="设置" style="margin-left:10px;">
+        <el-input v-model="formModel.label" />
+      </el-form-item>
+    </el-form>
+    <el-form v-if="type === 'edge'" label-width="80" label-position="right" @submit.native.prevent="handleSubmit">
+      <el-form-item label="设置" style="margin-left:10px;">
+        <el-input v-model="formModel.label"></el-input>
+      </el-form-item>
+    </el-form>
+    <el-form v-if="type === 'group'" label-width="80" label-position="right" @submit.native.prevent="handleSubmit">
+      <el-form-item>
+        <el-input v-model="formModel.label" @blur.prevent="handleSubmit" />
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
@@ -103,6 +48,7 @@ export default {
   },
 
   methods: {
+    // 提交触发的函数
     handleSubmit() {
       const { getSelected, executeCommand, update } = this.root.propsAPI
       const { formModel } = this
@@ -203,5 +149,19 @@ hr {
     height: 30px;
     margin: 0 auto;
   }
+}
+.el-form {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.el-input,
+.el-textarea {
+  width: 200px;
+  margin: 0 auto;
+}
+.updateBtn {
+  text-align: center;
 }
 </style>
