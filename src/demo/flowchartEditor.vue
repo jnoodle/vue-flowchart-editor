@@ -32,30 +32,28 @@
               <p>检测状态 : </p>
               <p class="setStatus">状态设置 : </p>
               <p class="setStatus">状态转移 : </p>
-              <p class="setCondition">State 在[1-47]区间 且 无需电池电压低 检测确认</p>
+              <p class="setCondition">State 在[1-47]区间 且 无需电池电压低 且 无BMS通讯丢失故障 且 接收到BMS首帧报文 且 延迟 T7 检测确认</p>
             </div>
             <div class="status">
               <p>确认状态 : </p>
               <p class="setStatus">状态设置 : </p>
               <p class="setStatus">状态转移 : </p>
+              <p class="setCondition">电池SOC小于SOC2 确认故障</p>
             </div>
             <div class="status">
               <p>故障状态 : </p>
               <p class="setStatus">状态设置 : </p>
               <p class="setCondition">设置 故障处理 </p>
+              <p class="setCondition">设置 仪表提示 </p>
+              <p class="setCondition">设置 最高报警等级 </p>
               <p class="setStatus">状态转移 : </p>
-            </div>
-            <div class="status">
-              <p>故障处理 : </p>
-              <p class="setStatus">如果 KbDIA_VCUHiLowLock_flg == 1</p>
-              <p class="setCondition">如果 车速 > 1km/h</p>
-              <p class="result">LEVEL=6</p>
-              <p class="setCondition">否则</p>
-              <p class="result">下高压/禁止高压上电</p>
-              <p class="result">LEVEL=1</p>
-              <p class="setCondition" style="word-break:break-all">否则 如果 kbDIA_VCUHiLowLock_flg == 0</p>
-              <p class="result">上报不处理</p>
-              <p class="result">LEVEL=6</p>
+              <p class="setCondition">电池SOC大于SOC3 故障恢复</p>
+              <p class="setStatus">故障处理 : </p>
+              <p class="setCondition">EVBUS上报故障</p>
+              <p class="setCondition">LEVEL = 6</p>
+              <p class="setStatus">仪表提示 : </p>
+              <p class="setStatus">最高报警等级 : </p>
+              <p class="setCondition">LEVELGB = 0</p>
             </div>
             <!-- <editor-detail-panel :read-only="readOnly" /> -->
           </div>
@@ -301,9 +299,10 @@ export default {
       .vfe-chart-sidebar-bottom {
         margin-top: -2vh;
         width: 100%;
-        padding-top: 8vh;
+        padding-top: 2vh;
+        overflow: auto;
         border-top: 1px solid #1183fb;
-        height: 50vh;
+        height: 40vh;
       }
     }
 
@@ -339,13 +338,14 @@ export default {
 
         .setStatus {
           text-indent: 2em;
+          margin: 10px 0;
         }
         .setCondition {
           text-indent: 4em;
         }
-        .result{
-          text-indent:6em;
-          font-weight:bold
+        .result {
+          text-indent: 6em;
+          font-weight: bold;
         }
         p {
           margin: 5px 0;

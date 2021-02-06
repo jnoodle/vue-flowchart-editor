@@ -56,6 +56,7 @@ export default [
       ],
     },
   },
+  // 三种状态转移结尾 设置
   {
     shape: 'flow-rhombus',
     model: {

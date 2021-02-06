@@ -1,16 +1,32 @@
 <template>
   <div readonly>
-    <el-form v-if="type === 'node'" label-width="80" label-position="right" @submit.native.prevent="handleSubmit">
-      <el-form-item label="设置" style="margin-left:10px;">
+    <!-- 只有1个值时，需要在el-form标签里添加@submit.native.prevent -->
+    <el-form v-if="type === 'node'" label-width="60px" label-position="right" @submit.native.prevent="handleSubmit">
+      <el-form-item label="修改状态" style="margin-left:10px;">
         <el-input v-model="formModel.label" />
       </el-form-item>
     </el-form>
-    <el-form v-if="type === 'edge'" label-width="80" label-position="right" @submit.native.prevent="handleSubmit">
-      <el-form-item label="设置" style="margin-left:10px;">
-        <el-input v-model="formModel.label"></el-input>
+    <!-- 有多个值时，不需要 -->
+    <!-- 问题：当超过两个时，会溢出，而且不可见 -->
+    <el-form v-if="type === 'edge'" label-width="60px" label-position="right">
+
+      <el-form-item label="信号" style="margin-left:10px;">
+        <template v-for="item in formModel.data">
+          <el-input v-model="item.signal" @keyup.enter.native="handleSubmit" :key="item.signal"></el-input>
+        </template>
+      </el-form-item>
+      <el-form-item label="关系" style="margin-left:10px;">
+        <template v-for="item in formModel.data">
+          <el-input v-model="item.op" @keyup.enter.native="handleSubmit" :key="item.op"></el-input>
+        </template>
+      </el-form-item>
+      <el-form-item label="值" style="margin-left:10px;">
+        <template v-for="item in formModel.data">
+          <el-input v-model="item.value" @keyup.enter.native="handleSubmit" :key="item.value"></el-input>
+        </template>
       </el-form-item>
     </el-form>
-    <el-form v-if="type === 'group'" label-width="80" label-position="right" @submit.native.prevent="handleSubmit">
+    <el-form v-if="type === 'group'" label-width="60px" label-position="right" @submit.native.prevent="handleSubmit">
       <el-form-item>
         <el-input v-model="formModel.label" @blur.prevent="handleSubmit" />
       </el-form-item>
@@ -49,7 +65,9 @@ export default {
 
   methods: {
     // 提交触发的函数
+    // 目前只支持修改label属性
     handleSubmit() {
+      alert('触发了提交函数')
       const { getSelected, executeCommand, update } = this.root.propsAPI
       const { formModel } = this
       setTimeout(() => {
@@ -115,8 +133,6 @@ export default {
 
         const newFormModel = adjustSize(formModel)
 
-        console.log(newFormModel)
-
         executeCommand(() => {
           update(item, newFormModel)
         })
@@ -160,6 +176,7 @@ hr {
 .el-textarea {
   width: 200px;
   margin: 0 auto;
+  margin-top:10px;
 }
 .updateBtn {
   text-align: center;

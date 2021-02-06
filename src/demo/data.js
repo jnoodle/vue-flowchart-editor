@@ -1,17 +1,19 @@
+// 在这里设置数据
 export default {
+  // 节点
   nodes: [
     // 检测状态
     {
       type: 'node',
       size: '70*48',
-      shape: 'flow-rect',
+      shape: 'flow-circle',
       color: '#1890FF',
       // color: '#FA8C16',
       label: '检测状态',
       x: 150,
-      y: 61,
+      y: 200,
       id: '1',
-      index: 0,
+      index: 1,
       data: [
         {
           name: 'prop1',
@@ -23,83 +25,16 @@ export default {
         },
       ],
     },
-    {
-      type: 'node',
-      size: '50*50',
-      shape: 'flow-circle',
-      // color: '#1890FF',
-      color: '#FA8C16',
-      label: '状态设置',
-      x: 70,
-      y: 201.5,
-      id: '11',
-      index: 1,
-      data: [
-        {
-          name: 'prop3',
-          value: 'prop3',
-        },
-        {
-          name: 'prop4',
-          value: 'prop4',
-        },
-      ],
-    },
-    {
-      type: 'node',
-      size: '50*50',
-      shape: 'flow-circle',
-      // color: '#1890FF',
-      color: '#FA8C16',
-      label: '状态转移',
-      x: 230,
-      y: 201.5,
-      id: '12',
-      index: 1,
-      data: [
-        {
-          name: 'prop3',
-          value: 'prop3',
-        },
-        {
-          name: 'prop4',
-          value: 'prop4',
-        },
-      ],
-    },
-    {
-      type: 'node',
-      size: '300*50',
-      shape: 'flow-rhombus',
-      // color: '#1890FF',
-      color: 'rgb(19, 194, 194)',
-      // color: '#FA8C16',
-      label: 'State 在[1-47]区间 且 无需电池电压低 检测确认',
-      x: 230,
-      y: 320,
-      id: '1211',
-      index: 1,
-      data: [
-        {
-          name: 'prop3',
-          value: 'prop3',
-        },
-        {
-          name: 'prop4',
-          value: 'prop4',
-        },
-      ],
-    },
-    // 确认状态
+    // 故障状态
     {
       type: 'node',
       size: '70*48',
       shape: 'flow-rect',
       color: '#1890FF',
       // color: '#FA8C16',
-      label: '确认状态',
+      label: '故障状态',
       x: 400,
-      y: 61,
+      y: 400,
       id: '2',
       index: 0,
       data: [
@@ -113,60 +48,16 @@ export default {
         },
       ],
     },
-    {
-      type: 'node',
-      size: '50*50',
-      shape: 'flow-circle',
-      // color: '#1890FF',
-      color: '#FA8C16',
-      label: '状态设置',
-      x: 320,
-      y: 201.5,
-      id: '21',
-      index: 1,
-      data: [
-        {
-          name: 'prop3',
-          value: 'prop3',
-        },
-        {
-          name: 'prop4',
-          value: 'prop4',
-        },
-      ],
-    },
-    {
-      type: 'node',
-      size: '50*50',
-      shape: 'flow-circle',
-      // color: '#1890FF',
-      color: '#FA8C16',
-      label: '状态转移',
-      x: 480,
-      y: 201.5,
-      id: '22',
-      index: 1,
-      data: [
-        {
-          name: 'prop3',
-          value: 'prop3',
-        },
-        {
-          name: 'prop4',
-          value: 'prop4',
-        },
-      ],
-    },
-    // 故障状态
+    // 确认状态
     {
       type: 'node',
       size: '70*48',
       shape: 'flow-rect',
       color: '#1890FF',
       // color: '#FA8C16',
-      label: '故障状态',
-      x: 650,
-      y: 61,
+      label: '确认状态',
+      x: 400,
+      y: 200,
       id: '3',
       index: 0,
       data: [
@@ -180,169 +71,71 @@ export default {
         },
       ],
     },
-    {
-      type: 'node',
-      size: '50*50',
-      shape: 'flow-circle',
-      // color: '#1890FF',
-      color: '#FA8C16',
-      label: '状态设置',
-      x: 570,
-      y: 201.5,
-      id: '31',
-      index: 1,
-      data: [
-        {
-          name: 'prop3',
-          value: 'prop3',
-        },
-        {
-          name: 'prop4',
-          value: 'prop4',
-        },
-      ],
-    },
-    {
-      type: 'node',
-      size: '50*50',
-      shape: 'flow-circle',
-      // color: '#1890FF',
-      color: '#FA8C16',
-      label: '状态转移',
-      x: 650,
-      y: 201.5,
-      id: '32',
-      index: 1,
-      data: [
-        {
-          name: 'prop3',
-          value: 'prop3',
-        },
-        {
-          name: 'prop4',
-          value: 'prop4',
-        },
-      ],
-    },
-    {
-      type: 'node',
-      size: '50*50',
-      shape: 'flow-circle',
-      // color: '#1890FF',
-      color: '#FA8C16',
-      label: '故障处理',
-      x: 730,
-      y: 201.5,
-      id: '33',
-      index: 1,
-      data: [
-        {
-          name: 'prop3',
-          value: 'prop3',
-        },
-        {
-          name: 'prop4',
-          value: 'prop4',
-        },
-      ],
-    },
-    {
-      type: 'node',
-      size: '80*80',
-      shape: 'flow-rhombus',
-      color: 'rgb(19, 194, 194)',
-      label: '故障处理',
-      x: 570,
-      y: 320,
-      id: '3111',
-      index: 1,
-      data: [
-        {
-          name: 'prop3',
-          value: 'prop3',
-        },
-        {
-          name: 'prop4',
-          value: 'prop4',
-        },
-      ],
-    },
   ],
+  // 边
   edges: [
-    // 检测状态下的连接边
     {
       source: '1',
-      sourceAnchor: 2,
-      target: '11',
-      targetAnchor: 0,
-      id: '111',
-      index: 4,
+      target: '3',
+      id: '4',
+      label: '检测确认条件1',
+      data: [
+        {
+          signal: 'State',
+          op: 'between',
+          value: '[1-47]',
+        },
+        {
+          signal: '无需电池电压低',
+          op: '==',
+          value: 'True',
+        },
+        {
+          signal: '无BMS通讯丢失故障',
+          op: '==',
+          value: 'True',
+        },
+        {
+          signal: '接收到BMS首帧报文',
+          op: '==',
+          value: 'True',
+        },
+        {
+          signal: '状态延迟时间',
+          op: '==',
+          value: 'T7',
+        },
+      ],
     },
     {
-      source: '1',
-      sourceAnchor: 2,
-      target: '12',
-      targetAnchor: 0,
-      id: '121',
-      index: 4,
+      source: '3',
+      target: '2',
+      id: '5',
+      index: 1,
+      label: '确认故障条件1',
+      data: [
+        {
+          signal: '电池SOC',
+          op: '<',
+          value: 'SOC2',
+        },
+      ],
     },
-    {
-      source: '12',
-      sourceAnchor: 2,
-      target: '1211',
-      targetAnchor: 0,
-      id: '1212',
-      index: 4,
-    },
-    // 确认状态下的连接边
     {
       source: '2',
-      sourceAnchor: 2,
-      target: '21',
-      targetAnchor: 0,
-      id: '211',
-      index: 4,
-    },
-    {
-      source: '2',
-      sourceAnchor: 2,
-      target: '22',
-      targetAnchor: 0,
-      id: '221',
-      index: 4,
-    },
-    // 故障状态下的连接边
-    {
-      source: '3',
-      sourceAnchor: 2,
-      target: '31',
-      targetAnchor: 0,
-      id: '311',
-      index: 4,
-    },
-    {
-      source: '3',
-      sourceAnchor: 2,
-      target: '32',
-      targetAnchor: 0,
-      id: '321',
-      index: 4,
-    },
-    {
-      source: '3',
-      sourceAnchor: 2,
-      target: '33',
-      targetAnchor: 0,
-      id: '331',
-      index: 4,
-    },
-    {
-      source: '31',
-      sourceAnchor: 2,
-      target: '3111',
-      targetAnchor: 0,
-      id: '3311',
-      index: 4,
+      target: '3',
+      id: '7',
+      index: 2,
+      label: '故障恢复条件1',
+      data: [
+        {
+          signal: '电池SOC',
+          op: '>',
+          value: 'SOC2',
+        },
+      ],
     },
   ],
 }
+
+// 目前这些都是写好的数据？如何动态添加数据？
