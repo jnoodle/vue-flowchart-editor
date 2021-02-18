@@ -1,75 +1,62 @@
+<!-- 这里可能需要添加新增、删除功能 -->
+<!-- 动态新增、删除 -->
 <template>
-  <div>
-    <form readonly>
-      <div v-if="type === 'node'">
-        <!--  customize properties -->
-        <p class="form-item">
-          <label>id</label>
-          <input v-model="formModel.id" />
-        </p>
-        <p class="form-item">
-          <label>名称</label>
-          <input v-model="formModel.label" />
-        </p>
-        <p class="form-item" v-for="item in formModel.data" :key="item.name">
-          <label>{{ item.name }}</label>
-          <input v-model="item.value" />
-        </p>
-        <hr />
-        <p class="form-item">
-          <label>颜色</label>
-          <input v-model="formModel.color" />
-        </p>
-        <p class="form-item">
-          <label>形状</label>
-          <select v-model="formModel.shape">
-            <option value="">-- 请选择节点的形状 --</option>
-            <option value="flow-rect">rect</option>
-            <option value="flow-circle">circle</option>
-            <option value="flow-rhombus">rhombus</option>
-            <option value="flow-capsule">capsule</option>
-          </select>
-        </p>
-        <p class="form-item">
-          <label>尺寸</label>
-          <input v-model="formModel.size" />
-        </p>
-        <p class="form-item">
-          <button @click.prevent="handleSubmit" v-if="!readOnly">
-            更新属性
-          </button>
-        </p>
-      </div>
-      <div v-else-if="type === 'edge'">
-        <p>
-          <select v-model="formModel.shape">
-            <option value="">-- 请选择边的形状 --</option>
-            <option value="flow-smooth">Smooth</option>
-            <option value="flow-polyline">Polyline</option>
-            <option value="flow-polyline-round">Polyline Round</option>
-            <option value="custom-polyline">Custom Polyline</option>
-          </select>
-        </p>
-        <p class="form-item">
-          <label>id</label>
-          <input v-model="formModel.id" />
-        </p>
-        <p class="form-item">
-          <label>名称</label>
-          <input v-model="formModel.label" />
-        </p>
-        <p class="form-item" v-for="item in formModel.data" :key="item.name">
-          <label>{{ item.name }}</label>
-          <input v-model="item.value" />
-        </p>
-        <p class="form-item">
-          <button @click.prevent="handleSubmit">更新属性</button>
-        </p>
-      </div>
-      <div v-else-if="type === 'group'">
-        <input v-model="formModel.label" @blur.prevent="handleSubmit" />
-      </div>
-    </form>
+  <div readonly>
+    <!-- 只有1个值时，需要在el-form标签里添加@submit.native.prevent -->
+    <el-form v-if="type === 'node'" label-width="80px" label-position="right" @submit.native.prevent="handleSubmit">
+      <el-form-item label="修改状态">
+        <el-input v-model="formModel.label" />
+      </el-form-item>
+    </el-form>
+    <!-- 循环时会出现key值重复，导致vue报错 -->
+    <!-- 怎么解决？ -->
+
+    <!-- 需要把el-input换成el-autocomplete -->
+    <!-- 实现联想功能 -->
+
+    <!-- 操作目前无法进行记录 -->
+
+    <!-- 新加的边无法对条件进行增删改 -->
+    <!-- 对应的formModel的data怎么获取 -->
+
+    <!-- 组件之间怎么进行传值 -->
+    <el-form v-if="type === 'edge'" label-width="60px" label-position="right" @submit.native.prevent="handleSubmit">
+      <el-form-item label="条件名">
+        <el-input v-model="formModel.label" @keyup.native="handleSubmit"></el-input>
+      </el-form-item>
+      <el-form-item label="标识">
+        <template v-for="(item,index) in formModel.data">
+          <el-input v-model="item.signal" @keyup.native="handleSubmit" :key="item.id"></el-input>
+          <template v-if="index == 0">
+            <el-button @click="addCondition" type="primary" size="mini" icon="el-icon-plus" :key="item.signal+8*(index+1)"></el-button>
+          </template>
+          <el-button type="danger" size="mini" icon="el-icon-minus" :key="item.signal+16*(index+1)" @click="removeCondition(index)"></el-button>
+        </template>
+      </el-form-item>
+      <el-form-item label="关系">
+        <template v-for="(item,index) in formModel.data">
+          <el-input v-model="item.op" @keyup.native="handleSubmit" :key="item.id"></el-input>
+          <template v-if="index == 0">
+            <el-button @click="addCondition" type="primary" size="mini" icon="el-icon-plus" :key="item.op+8*(index+1)"></el-button>
+          </template>
+          <el-button type="danger" size="mini" icon="el-icon-minus" :key="item.op+16*(index+1)" @click="removeCondition(index)"></el-button>
+        </template>
+      </el-form-item>
+      <el-form-item label="值">
+        <template v-for="(item,index) in formModel.data">
+          <el-input v-model="item.value" @keyup.native="handleSubmit" :key="item.id"></el-input>
+          <template v-if="index == 0">
+            <el-button @click="addCondition" type="primary" size="mini" icon="el-icon-plus" :key="item.value+8*(index+1)"></el-button>
+          </template>
+          <el-button type="danger" size="mini" icon="el-icon-minus" :key="item.value+16*(index+1)" @click="removeCondition(index)"></el-button>
+        </template>
+      </el-form-item>
+    </el-form>
+    <el-form v-if="type === 'group'" label-width="100px" label-position="right" @submit.native.prevent="handleSubmit">
+      <el-form-item>
+        <el-input v-model="formModel.label" @blur.prevent="handleSubmit" />
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
@@ -103,13 +90,13 @@ export default {
   },
 
   methods: {
+    // 提交触发的函数
     handleSubmit() {
       const { getSelected, executeCommand, update } = this.root.propsAPI
       const { formModel } = this
       setTimeout(() => {
         const item = getSelected()[0]
         if (!item) return
-
         // 自动调整尺寸
         const adjustSize = (model) => {
           if (model.type !== 'node' || model.shape !== 'flow-rect') {
@@ -126,11 +113,9 @@ export default {
           const widthWithSpacing =
             canvasContext.measureText(label).width + spacing
           model.size = `${sourceWidth}*${sourceHeight}` // 先恢复默认尺寸
-
           if (widthWithSpacing <= sourceWidth || sourceWidth >= maxWidth) {
             return model
           }
-
           // 自动撑宽
           if (widthWithSpacing <= maxWidth) {
             return {
@@ -138,25 +123,20 @@ export default {
               size: `${widthWithSpacing}*${sourceHeight}`,
             }
           }
-
           // 自动折行
           let multilineText = ''
           let multilineCount = 1
           let multilineTextWidth = 0
-
           for (const char of label) {
             const { width } = canvasContext.measureText(char)
-
             if (multilineTextWidth + width + spacing >= maxWidth) {
               multilineText += '\n'
               multilineTextWidth = 0
               multilineCount++
             }
-
             multilineText += char
             multilineTextWidth += width
           }
-
           return {
             ...model,
             label: multilineText,
@@ -166,15 +146,27 @@ export default {
             )}`,
           }
         }
-
         const newFormModel = adjustSize(formModel)
-
-        console.log(newFormModel)
-
         executeCommand(() => {
           update(item, newFormModel)
         })
       }, 0)
+    },
+    addCondition() {
+      this.formModel.data.push({
+        signal: '',
+        op: '',
+        value: '',
+        id: Number(new Date()),
+      })
+      this.handleSubmit()
+    },
+    removeCondition(index) {
+      // 删除当前的某一个条件
+      if (this.formModel.data.length > 1) {
+        this.formModel.data.splice(index, 1)
+        this.handleSubmit()
+      }
     },
   },
 }
@@ -189,19 +181,18 @@ hr {
 .form-item {
   display: flex;
   font-size: 12px;
-
-  label {
-    width: 70px;
-    margin-right: 10px;
-    text-align: right;
-  }
-  input {
-    width: 160px;
-  }
-  button {
-    width: 160px;
-    height: 30px;
-    margin: 0 auto;
-  }
+}
+.el-form {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.el-button {
+  margin-left: 3px;
+}
+.el-input,
+.el-textarea {
+  width: 180px;
+  margin-bottom: 5px;
 }
 </style>

@@ -11,9 +11,7 @@ import Icon from './Icon'
 
 export default {
   name: 'EditorToolbarButton',
-
   props: ['command', 'icon', 'text', 'label'],
-
   computed: {
     iconType() {
       return `icon${this.icon || this.command}`

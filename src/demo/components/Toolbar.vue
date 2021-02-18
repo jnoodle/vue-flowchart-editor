@@ -3,25 +3,30 @@
     <template v-if="!readOnly">
       <toolbar-button command="undo" text="撤销" />
       <toolbar-button command="redo" text="重做" />
-      <toolbar-button command="copy" text="复制" />
-      <toolbar-button command="paste" text="粘贴" />
+      <!-- <toolbar-button command="copy" text="复制" /> -->
+      <!-- <toolbar-button command="paste" text="粘贴" /> -->
       <div class="split"></div>
     </template>
     <toolbar-button command="zoomIn" icon="zoom-in" text="放大" />
     <toolbar-button command="zoomOut" icon="zoom-out" text="缩小" />
     <toolbar-button command="autoZoom" icon="fit" text="自适应" />
-    <toolbar-button command="resetZoom" icon="actual-size" text="实际尺寸" />
+    <!-- <toolbar-button command="resetZoom" icon="actual-size" text="实际尺寸" /> -->
     <template v-if="!readOnly">
       <div class="split"></div>
-      <toolbar-button command="toBack" icon="to-back" text="向下一层" />
+      <!-- <toolbar-button command="toBack" icon="to-back" text="向下一层" />
       <toolbar-button command="toFront" icon="to-front" text="向上一层" />
       <toolbar-button command="addGroup" icon="group" text="编组" />
-      <toolbar-button command="unGroup" icon="ungroup" text="取消编组" />
-      <toolbar-button command="selectAll" icon="select-all" text="全选" />
-      <toolbar-button command="multiSelect" icon="select" text="框选" />
-      <div class="split"></div>
-      <toolbar-button command="delete" text="删除" label="保存数据" />
-      <toolbar-button command="clear" icon="clear" text="清空画布" />
+      <toolbar-button command="unGroup" icon="ungroup" text="取消编组" /> -->
+      <!-- <toolbar-button command="selectAll" icon="select-all" text="全选" /> -->
+      <!-- <toolbar-button command="multiSelect" icon="select" text="框选" /> -->
+      <!-- <div class="split"></div> -->
+      <toolbar-button command="delete" text="删除" label="删除数据" />
+      <toolbar-button
+        command="clear"
+        icon="clear"
+        text="清空画布"
+        label="清空画布"
+      />
     </template>
     <!-- right toolbar button -->
     <div class="pull-right">
@@ -37,9 +42,9 @@
         text="下载图像"
         label="下载图像"
       />
-      <button @click.prevent="handleToggleReadOnly">
+      <!-- <button @click.prevent="handleToggleReadOnly">
         {{ readOnly ? '编辑模式' : '只读模式' }}
-      </button>
+      </button> -->
     </div>
   </toolbar>
 </template>
@@ -60,12 +65,13 @@ export default {
 
   methods: {
     generateData() {
+      // alert("点击了生成按钮")
       console.log(JSON.stringify(this.chartData))
     },
-    handleToggleReadOnly() {
-      // ugly
-      this.$parent.$parent.$parent.$emit('toggle-read-only')
-    },
+    // handleToggleReadOnly() {
+    //   // ugly
+    //   this.$parent.$parent.$parent.$emit('toggle-read-only')
+    // },
   },
 }
 </script>
@@ -91,7 +97,7 @@ export default {
 
   .command {
     display: flex;
-    color: #333;
+    color: #fff;
 
     i {
       display: block;
@@ -100,7 +106,7 @@ export default {
       margin: 0 6px;
       padding-top: 10px;
       text-align: center;
-      border: 1px solid #fff;
+      // border: 1px solid #fff;
       cursor: pointer;
     }
 
@@ -115,12 +121,14 @@ export default {
     }
 
     &:hover {
-      color: #1890ff;
+      // color: #1890ff;
+      background-color: rgba(12,100,235,.8)
     }
   }
 
   .disable {
-    color: rgba(0, 0, 0, 0.25);
+    // color: rgba(0, 0, 0, 0.25);
+    color:rgba(0, 0, 0, 0.25);
     i {
       cursor: not-allowed;
     }
@@ -130,7 +138,8 @@ export default {
     }
 
     &:hover {
-      color: rgba(0, 0, 0, 0.25);
+      // color: rgba(0, 0, 0, 0.25);
+      background-color: rgba(12,100,235,.8)
     }
   }
 }

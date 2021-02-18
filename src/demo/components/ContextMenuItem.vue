@@ -14,14 +14,11 @@ import upperFirst from 'lodash/upperFirst'
 
 export default {
   name: 'EditorContextMenuItem',
-
   components: {
     Command,
     Icon,
   },
-
   props: ['command', 'icon', 'text'],
-
   computed: {
     iconType() {
       return `icon${this.icon || this.command}`
