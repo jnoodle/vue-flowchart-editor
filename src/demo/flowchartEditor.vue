@@ -26,6 +26,8 @@
           </div>
         </div>
         <!-- Right Panel -->
+
+        <!-- 这部分需要改成动态的 -->
         <div class="vfe-chart-panel">
           <div class="vfe-chart-panel-detail">
             <div class="status">
@@ -47,7 +49,7 @@
               <p class="setCondition">设置 仪表提示 </p>
               <p class="setCondition">设置 最高报警等级 </p>
               <p class="setStatus">状态转移 : </p>
-              <p class="setCondition">电池SOC大于SOC3 故障恢复</p>
+              <p class="setCondition">电池SOC大于SOC2 故障恢复</p>
               <p class="setStatus">故障处理 : </p>
               <p class="setCondition">EVBUS上报故障</p>
               <p class="setCondition">LEVEL = 6</p>
@@ -285,7 +287,8 @@ export default {
       display: flex;
       flex-wrap: wrap;
       // justify-content: center;
-      width: 300px;
+      // width: 300px;
+      width: 360px;
       padding-top: 10px;
       // height: 40vh;
       background-color: #fafafa;
@@ -293,7 +296,7 @@ export default {
       border-bottom: 1px solid #1183fb;
       box-shadow: 0 0 10px #00a1d6;
       .vfe-chart-sidebar-top {
-        height: 50vh;
+        height: 30vh;
         width: 100%;
       }
       .vfe-chart-sidebar-bottom {
@@ -308,7 +311,8 @@ export default {
 
     .vfe-chart-panel {
       position: relative;
-      width: 300px;
+      // width: 300px;
+      width: 360px;
       height: 100vh;
       font-size: 11px;
       background-color: #fafafa;
@@ -319,7 +323,8 @@ export default {
         box-sizing: border-box;
         position: fixed;
         top: 45px;
-        width: 300px;
+        // width: 300px;
+        width:  360px;
         padding: 10px;
         height: 100vh;
         // height: ~'calc(100% - 250px)';

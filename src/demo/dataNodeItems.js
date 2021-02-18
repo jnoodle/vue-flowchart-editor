@@ -78,22 +78,22 @@ export default [
       label: '故障恢复',
     },
   },
-  {
-    model: {},
-  },
-  {
-    shape: 'flow-circle',
-    size: '50*50',
-    model: {
-      color: '#FA8C16',
-    },
-  },
-  {
-    shape: 'flow-rhombus',
-    model: {
-      color: '#13C2C2',
-    },
-  },
+  // {
+  //   model: {},
+  // },
+  // {
+  //   shape: 'flow-circle',
+  //   size: '50*50',
+  //   model: {
+  //     color: '#FA8C16',
+  //   },
+  // },
+  // {
+  //   shape: 'flow-rhombus',
+  //   model: {
+  //     color: '#13C2C2',
+  //   },
+  // },
   // {
   //   shape: 'flow-circle',
   //   size: '50*50',

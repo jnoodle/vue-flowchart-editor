@@ -33,8 +33,8 @@ export default {
       color: '#1890FF',
       // color: '#FA8C16',
       label: '故障状态',
-      x: 400,
-      y: 400,
+      x: 520,
+      y: 300,
       id: '2',
       index: 0,
       data: [

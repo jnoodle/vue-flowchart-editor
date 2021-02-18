@@ -46,7 +46,8 @@ export default {
   top: 45px;
   bottom: 50%;
   left: 0;
-  width: 300px;
+  // width: 300px;
+  width: 360px;
   padding: 10px;
   text-align: center;
   overflow-y: auto;
