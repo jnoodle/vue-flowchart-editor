@@ -33,8 +33,8 @@
   "jsdelivr": "dist/vue-flowchart-editor.umd.min.js",
   "scripts": {
     "serve": "vue-cli-service serve src/demo/app.js",
-    "build:demo": "BUILD=demo vue-cli-service build src/demo/app.js",
-    "build:lib": "BUILD=lib vue-cli-service build --target lib --name vue-flowchart-editor src/index.js",
+    "build:demo": "vue-cli-service build src/demo/app.js",
+    "build:lib": "vue-cli-service build --target lib --name vue-flowchart-editor src/index.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

@@ -14,11 +14,6 @@
     <!-- 循环时会出现key值重复，导致vue报错 -->
     <!-- 怎么解决？ -->
 
-    <!-- 循环里头的项需按行排列 -->
-    <!-- 循环外头的项需按列排序 -->
-
-    <!-- 当删到只剩一个时，出现bug，按钮在右边出现 -->
-
     <!-- 到时候需要把el-input换成el-autocomplete -->
     <!-- 实现联想功能 -->
     <el-form v-if="type === 'edge'" label-width="60px" label-position="right">
@@ -162,6 +157,7 @@ export default {
       }, 0)
     },
     addCondition() {
+      console.log(this.formModel.data.length);
       this.formModel.data.push({
         signal: '',
         op: '',
