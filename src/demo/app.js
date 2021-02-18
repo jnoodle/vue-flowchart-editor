@@ -7,6 +7,6 @@ import App from './demo.vue'
 // projectId=1546640
 import './iconfont'
 Vue.use(ElementUI)
-new Vue({
+const app = new Vue({
   render: (h) => h(App),
 }).$mount('#app')

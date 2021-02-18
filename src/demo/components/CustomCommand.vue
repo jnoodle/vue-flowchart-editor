@@ -35,13 +35,13 @@ export default {
         },
         execute(/* editor */) {
           // 正向命令逻辑
-          alert('执行正向命令')
+          // console.log('执行正向命令')
           const data = propsAPI.save()
           save(data)
         },
         back(/* editor */) {
           // 反向命令逻辑
-          console.log('执行反向命令')
+          // console.log('执行反向命令')
         },
       },
       downloadImageCommandConfig: {

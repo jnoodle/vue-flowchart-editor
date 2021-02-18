@@ -65,7 +65,7 @@ export default {
 
   methods: {
     generateData() {
-      alert("点击了生成按钮")
+      // alert("点击了生成按钮")
       console.log(JSON.stringify(this.chartData))
     },
     // handleToggleReadOnly() {

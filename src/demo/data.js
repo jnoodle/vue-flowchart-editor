@@ -1,4 +1,4 @@
-// 在这里设置数据
+// 默认显示的数据与图形
 export default {
   // 节点
   nodes: [
@@ -84,26 +84,31 @@ export default {
           signal: 'State',
           op: 'between',
           value: '[1-47]',
+          id:1,
         },
         {
           signal: '无需电池电压低',
           op: '==',
           value: 'True',
+          id: 2,
         },
         {
           signal: '无BMS通讯丢失故障',
           op: '==',
           value: 'True',
+          id: 3,
         },
         {
           signal: '接收到BMS首帧报文',
           op: '==',
           value: 'True',
+          id: 4,
         },
         {
           signal: '状态延迟时间',
           op: '==',
           value: 'T7',
+          id: 5,
         },
       ],
     },
@@ -118,6 +123,8 @@ export default {
           signal: '电池SOC',
           op: '<',
           value: 'SOC2',
+
+          id: 6,
         },
       ],
     },
@@ -132,6 +139,8 @@ export default {
           signal: '电池SOC',
           op: '>',
           value: 'SOC2',
+
+          id: 7,
         },
       ],
     },
@@ -139,3 +148,4 @@ export default {
 }
 
 // 目前这些都是写好的数据？如何动态添加数据？
+// 调用后端接口

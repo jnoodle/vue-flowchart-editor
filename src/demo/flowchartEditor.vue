@@ -19,16 +19,21 @@
         <div class="vfe-chart-main">
           <flow :data="flowChartData" :onClick="handleClick" :onNodeClick="handleNodeClick" :onNodeDoubleClick="handleNodeDoubleClick" :onNodeMouseLeave="handleNodeMouseLeave"
             :onAfterChange="handleAfterChange" :graph="graphConfig" />
+          <div class="vfe-chart-main-minimap">
+            <editor-minimap />
+          </div>
           <div class="tooltip">
             <template v-for="item in tooltipData">
               <p :key="item.name">{{ item.name }}: {{ item.value }}</p>
             </template>
           </div>
+
         </div>
         <!-- Right Panel -->
 
         <!-- 这部分需要改成动态的 -->
         <div class="vfe-chart-panel">
+
           <div class="vfe-chart-panel-detail">
             <div class="status">
               <p>检测状态 : </p>
@@ -77,7 +82,7 @@ import VueFlowchartEditor, { Flow, RegisterEdge } from '../index'
 import EditorToolbar from './components/Toolbar'
 import EditorItemPanel from './components/ItemPanel'
 import EditorDetailPanel from './components/DetailPanel'
-// import EditorMinimap from './components/EditorMinimap'
+import EditorMinimap from './components/EditorMinimap'
 import EditorContextMenu from './components/ContextMenu'
 import CustomCommand from './components/CustomCommand'
 import { throttle } from 'lodash'
@@ -91,7 +96,7 @@ export default {
     EditorToolbar,
     EditorItemPanel,
     EditorDetailPanel,
-    // EditorMinimap,
+    EditorMinimap,
     EditorContextMenu,
     CustomCommand,
     RegisterEdge,
@@ -131,47 +136,16 @@ export default {
       tooltipData: [],
     }
   },
-
   mounted() {
     this.tooltipDom = document.getElementsByClassName('tooltip')[0]
   },
   methods: {
-    // 在右边显示文字
-    handleJson(item) {
-      let str = ''
-      if (item.nodes.length) {
-        item.nodes.map((i) => {
-          str += i.label + ' : '
-        })
-      }
-      str = str.replace(/[:]/g, ':\n ')
-      console.log(item)
-      return str
-    },
-    handleClick(e) {
-      console.log(e)
-      // 分成节点和边
-      if (this.readOnly && !e.item) {
-        this.tooltipDom.style.display = 'none'
-      } else {
-        if (e._type == 'node:click') {
-        } else if (e._type == 'edge:click') {
-          // 点击的是边
-          // alert(e.item.model.label)
-        }
-      }
-    },
-
+    handleClick(e) {},
     handleNodeClick(e) {
-      // 点击节点
-      console.log('点击了节点')
-      // alert(e.item.model.label)
       console.log(e)
     },
-
     handleNodeDoubleClick(e) {
       // 双击节点
-      console.log(e.item.model.data)
       if (this.readOnly) {
         this.tooltipData = e.item.model.data
         this.$nextTick(() => {
@@ -194,23 +168,33 @@ export default {
         trailing: true,
       }
     ),
+    // 处理更改之后的函数
+
+    // 怎么获取到item对应的函数的？
     handleAfterChange(e) {
       if (!this.readOnly) {
         const { action, item } = e
-        console.log(action)
+        console.log(action, item)
         if (item && item.getModel) {
           const model = item.getModel()
-          console.log(model)
+          if (!model.data) {
+            // 需要先定义成空数组，不然默认为undefined
+            model.data = []
+            model.data.push({
+              signal: '',
+              op: '',
+              value: '',
+              id: Number(new Date()),
+            })
+          }
         }
         // 可以根据 action 和 model 来决定是否删掉左侧用过的节点
       }
     },
-
     saveChartData(data) {
       console.log(data)
       this.$emit('save-data', data)
     },
-
     _downloadImage(data, filename = 'flowchart.png') {
       const a = document.createElement('a')
       a.href = data
@@ -218,7 +202,6 @@ export default {
       document.body.appendChild(a)
       a.click()
     },
-
     downloadImage() {
       const page = this.$refs['flowChart'].propsAPI.editor.getCurrentPage()
       this._downloadImage(page.saveImage().toDataURL('image/png'))
@@ -256,7 +239,6 @@ export default {
     display: flex;
     overflow: hidden;
     background-color: #fff;
-
     .vfe-chart-main {
       position: relative;
       flex: 1;
@@ -280,6 +262,16 @@ export default {
           margin: 0;
         }
       }
+      .vfe-chart-main-minimap {
+        position: fixed;
+        // top: 43px;
+        top: 43px;
+        right: 362px;
+        width: 160px;
+        height: 160px;
+        // border-top: 1px solid #1183fb;
+        border: 1px solid black;
+      }
     }
 
     .vfe-chart-sidebar {
@@ -296,16 +288,18 @@ export default {
       border-bottom: 1px solid #1183fb;
       box-shadow: 0 0 10px #00a1d6;
       .vfe-chart-sidebar-top {
-        height: 30vh;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        height: 10vh;
         width: 100%;
       }
       .vfe-chart-sidebar-bottom {
-        margin-top: -2vh;
-        width: 100%;
         padding-top: 2vh;
+        width: 100%;
         overflow: auto;
         border-top: 1px solid #1183fb;
-        height: 40vh;
+        height: 80vh;
       }
     }
 
@@ -324,20 +318,22 @@ export default {
         position: fixed;
         top: 45px;
         // width: 300px;
-        width:  360px;
+        width: 360px;
         padding: 10px;
         height: 100vh;
         // height: ~'calc(100% - 250px)';
         overflow-y: auto;
       }
 
-      .vfe-chart-panel-minimap {
-        position: fixed;
-        bottom: 0;
-        width: 300px;
-        height: 200px;
-        border-top: 1px solid #1183fb;
-      }
+      // .vfe-chart-panel-minimap {
+      //   position: fixed;
+      //   // top: 43px;
+      //   bottom: 0;
+      //   width: 200px;
+      //   height: 200px;
+      //   // border-top: 1px solid #1183fb;
+      //   border: 1px solid black;
+      // }
       .status {
         margin-bottom: 20px;
 

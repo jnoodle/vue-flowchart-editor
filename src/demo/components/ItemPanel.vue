@@ -41,11 +41,11 @@ export default {
 <style lang="less">
 .item-panel {
   box-sizing: border-box;
-  position: fixed;
-  height: 50vh;
-  top: 45px;
-  bottom: 50%;
-  left: 0;
+  // position: fixed;
+  // height: 50vh;
+  // top: 45px;
+  // bottom: 50%;
+  // left: 0;
   // width: 300px;
   width: 360px;
   padding: 10px;
@@ -74,7 +74,7 @@ export default {
     }
 
     &.item-flow-circle {
-      width: 50px;
+      width: 70px;
       height: 50px;
       margin: 0 40px;
       border-radius: 60px;
